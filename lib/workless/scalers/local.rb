@@ -7,7 +7,8 @@ module Delayed
       class Local < Base
 
         def up
-          Rush::Box.new[Rails.root].bash("rake jobs:work", :background => true) if workers == 0
+          Rush::Box.new[Rails.root].bash("RAILS_ENV=#{Rails.env} bundle exec rake jobs:work", :background => true) if workers == 0
+          # Rush::Box.new[Rails.root].bash("rake jobs:work", :background => true) if workers == 0
           true
         end
 
